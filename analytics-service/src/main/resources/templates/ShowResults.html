@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Results</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container mt-4">
+    <h2>Show Results</h2>
+
+    <!-- Table to display results -->
+    <table class="table mt-4">
+        <thead>
+        <tr>
+            <th>Max Grade</th>
+            <th>Min Grade</th>
+            <th>Average Grade</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Display all results -->
+        <tr th:each="result : ${results}">
+            <td th:text="${result['maxGrade']}"></td>
+            <td th:text="${result['minGrade']}"></td>
+            <td th:text="${result['average']}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</div>
+
+</body>
+</html>

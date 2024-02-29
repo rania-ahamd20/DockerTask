@@ -1,0 +1,52 @@
+version: '3'
+
+services:
+  authentication-service:
+    container_name: auth-service
+    build: ./authentication-service
+    ports:
+      - "8080:8080"
+    restart: always
+
+
+  enter-data-service:
+    container_name: enter-data-service
+    build: ./enter-data-service
+    ports:
+      - "8081:8081"
+    restart: always
+    depends_on:
+      authentication-service:
+        condition: service_started
+
+
+
+  show-results-service:
+    container_name: show-results-service
+    build: ./show-results-service
+    ports:
+      - "8082:8082"
+    restart: always
+    depends_on:
+      authentication-service:
+        condition: service_started
+      mongodb:
+        condition: service_started
+
+
+  analytics-service:
+    container_name: analytics-service
+    build: ./analytics-service
+    ports:
+      - "8083:8083"
+    restart: always
+    depends_on:
+      enter-data-service:
+        condition: service_started
+      mongodb:
+        condition: service_started
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
